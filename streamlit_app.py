@@ -1,6 +1,6 @@
 # Import python packages
 import streamlit as st
-from snowflake.snowpark.context import get_active_session
+#from snowflake.snowpark.context import get_active_session #used for Streamlit in Snowflake SiS
 from snowflake.snowpark.functions import col
 
 # Write directly to the app
@@ -9,11 +9,15 @@ st.write(
     """Choose the fruits you want in your custom Smoothie!
     """)
 
+#used for Streamlit not in Snowflake SniS
+cnx = st.connection("snowflake")
+session = cnx.session()
+
 #add a name box for smoothie orders
 name_on_order = st.text_input('Name on Smoothie:')
 st.write('The name on your Smoothie will be:', name_on_order)
 
-session = get_active_session()
+#session = get_active_session() #used for Streamlit in Snowflake SiS
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 
 #UNCOMMENT below if you want to see the dataframe
