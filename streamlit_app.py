@@ -20,6 +20,8 @@ st.write('The name on your Smoothie will be:', name_on_order)
 
 #session = get_active_session() #used for Streamlit in Snowflake SiS
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+st.dataframe(data=my_dataframe, use_container_width=True)
+st.stop()
 
 #UNCOMMENT below if you want to see the dataframe
 #st.dataframe(data=my_dataframe, use_container_width=True)
